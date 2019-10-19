@@ -1,4 +1,4 @@
-import pickle
+import pickle, string
 fn = "shakespearepickle"
 outfile = open(fn, "wb")
 
