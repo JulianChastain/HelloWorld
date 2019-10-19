@@ -36,10 +36,12 @@ for word_1, word_2 in pairs:
     else:
         word_dict[word_1] = [word_2]
 
-while True:
+firstWord = ""
+print("Finished Processing")
+while firstWord != "done":
     firstWord = input()
     if firstWord.lower() in word_dict:
-        print(random.choice(word_dict[firstWord]))
+        print(random.choice(word_dict[firstWord.lower()]))
     else:
         print("Not a valid word")
     print("\n")
