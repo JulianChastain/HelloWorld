@@ -35,7 +35,7 @@ def make_pairs(words):
 biglist = []
 for f in filenameList:
     try:
-        textFile = open(f,"r")
+        textFile = open(f,"r", encoding="utf8")
     except FileNotFoundError:
         print('File not found. Program exiting...\n')
         exit(2)
@@ -49,19 +49,29 @@ for f in filenameList:
             word_dict[word_1] = [word_2]
     biglist.append(word_dict)
 
-print("Training Files: Shakespearean (1)\n")
+'''print("Training Files: Shakespearean (1)\n Beyonce (2)\n Biblical(3)")
 try:
     userChoice = int(input("Enter your choice of training file: "))
 except TypeError:
     print("Invalid input. Program exiting...\n")
-    exit(1)
+    exit(1)'''
 
-firstWord = ""
+
 print("Finished Processing\n")
-while firstWord != "q":
-    firstWord = input("Enter a word: ")
+
+def returnWord(userChoice, firstWord):
     if firstWord.lower() in word_dict:
-        a = biglist[userChoice - 1]
-        print(random.choice(a[firstWord.lower()]))
+        a = biglist[userChoice]
+        nextwordlist = a[firstWord.lower()]
+        finalList = []
+        attempts = 0
+        while len(finalList) < 3 and attempts < 20:
+            word = random.choice(nextwordlist)
+            if word not in finalList:
+                finalList.append(word)
+            attempts += 1
+        return finalList
     else:
-        print("Not a valid word\n")
+        return []
+
+print(returnWord(0, "thou"))

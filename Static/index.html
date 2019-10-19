@@ -35,6 +35,14 @@
         font-size: 36px;
       }
 
+      .navbar {
+        background-color: #333;
+        overflow: hidden;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+}
+
       textarea[value]{
         color: gray;
       }
@@ -44,7 +52,7 @@
     <script type="text/javascript">
         var myApp = angular.module('myApp', []);
         myApp.controller('data',function ($scope, $http, $window){
-          $scope.dialect = "Shakespeare";
+          $scope.dialect = "0";
           $scope.getSuggestions = function() {
           if($scope.input.endsWith("  ")){
             var a = $scope.input.trim();
@@ -68,20 +76,23 @@
     <h1 style = "padding: 1px 20px;" > Markov-Based AutoComplete </h1>
     <h6 style = "text-align: left; margin: 0px"> mode: <span >
       <select ng-model="dialect" style="color:tomato; background-color: white; padding: 3px">
-          <option value="Shakespeare"> Shakespeare </option>
-          <option value="Beyonce"> Beyonce </option>
-          <option value="Bible"> Bible </option>
+          <option value="0"> Shakespeare </option>
+          <option value="1"> Beyonce </option>
+          <option value="2"> Bible </option>
       </select>
  </h6>
     <br>
 
     <form>
-        <textarea id= "in" type = "text" name = "inputdata" ng-model="input" value="Enter Text" ng-change = "getSuggestions()" ng-trim="false" rows="4" columns="50"> </textarea> <br>
+        <textarea type = "text" name = "inputdata" ng-model="input" value="Enter Text" ng-change = "getSuggestions()" ng-trim="false" rows="4" columns="50"> </textarea> <br>
         <p> {{"suggestions:"}} <span style="color: indianred"> {{suggestions}} </span></p>
     </form>
 
     <h4 style = "width: 300px; text-align:center; padding-left:100px; color:tomato"> Created by Aubry, Aru, Julian, and Matt. </h4>
 
+  </div>
+
+  <div class="navbar">
   </div>
 
 
