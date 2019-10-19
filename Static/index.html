@@ -60,9 +60,9 @@
           $scope.getSuggestions = function() {
           if($scope.input.endsWith("  ")){
             var a = $scope.input.trim();
-            $scope.input = a + " " + $scope.suggestions;
+            $scope.input = a + " " + ($scope.suggestions[0] || "");
           }
-          var words = $scope.input.split(" ");
+          var words = $scope.input.trim().split(" ");
           var lastWord = words[words.length -1];
           $http.get("/nextword", {params: {"lastWord":lastWord, "dialect":$scope.dialect}})
           .then(function(response){
@@ -86,11 +86,9 @@
     <br>
 
     <form>
-        <textarea type = "text" name = "inputdata" value = "none" ng-model="input" ng-change = "getSuggestions()" ng-trim="false" rows="4" columns="50"> </textarea>
-        <br>
+        <textarea type = "text" name = "inputdata" ng-model="input" value="Enter Text" ng-change = "getSuggestions()" ng-trim="false" rows="4" columns="50"> </textarea> <br>
+        <p> {{"suggestions:"}} <span style="color: indianred"> {{suggestions.join(" ")}} </span></p>
     </form>
-
-      <p> {{"suggestions:"}} <span style="color: indianred"> {{suggestions}} </span></p>
 
     <h4 style = "width: 300px; text-align:center; padding-left:100px; color:tomato"> Created by Aubry, Aru, Julian, and Matt. </h4>
 

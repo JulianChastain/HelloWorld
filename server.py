@@ -1,3 +1,4 @@
+import tornado.escape
 import tornado.ioloop
 import tornado.web
 import string
@@ -65,7 +66,9 @@ class nextWordHandler(tornado.web.RequestHandler):
     def get(self):
         lastWord = self.get_query_argument("lastWord")
         dialect = self.get_query_argument("dialect")
-        self.write(nextWord(lastWord))
+        suggestions = nextWord(int(dialect), lastWord)
+        self.set_header("Content-type", "application/json")
+        self.write(tornado.escape.json_encode(suggestions))
 
 def make_app():
         return tornado.web.Application([
