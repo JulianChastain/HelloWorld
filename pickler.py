@@ -18,11 +18,12 @@ def make_pairs(words):
     return parsedList
     for i in range(len(words)-1):
         yield (words[i], words[i+1])
-
+textFile = open("newTest.txt","r")
+parsedList = buildList(textFile)
 pairs = make_pairs(parsedList)
 word_dict = {}
 
-parsedList = buildList("newTest.txt")
+
 for word_1, word_2 in pairs:
     if word_1 in word_dict.keys():
         word_dict[word_1].append(word_2)
