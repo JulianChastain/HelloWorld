@@ -20,7 +20,7 @@
         padding: 200px 40%;
       }
 
-      input[type = "text"]{
+      textarea[type = "text"]{
         background-color: white;
         color: black;
         width: 400px;
@@ -28,9 +28,10 @@
         padding: 20px;
         border-radius: 6px;
         border: 2px solid;
+        font-size: 36px;
       }
 
-      input[value]{
+      textarea[value]{
         color: gray;
       }
 
@@ -40,13 +41,15 @@
         var myApp = angular.module('myApp', []);
         myApp.controller('data',function ($scope, $http){
           $scope.getSuggestions = function() {
-          var lastword = $scope.input.split(" ")[-1]
-          $http.get("/nextword", {params: {"lastword":lastword}})
+          var words = $scope.input.split(" ");
+          var lastWord = words[words.length -1];
+          $http.get("/nextword", {params: {"lastWord":lastword}})
           .then(function(response){
               $scope.suggestions = response.data;
           });
           };
         });
+
 
 
     </script>
@@ -55,17 +58,17 @@
   <body>
 
 
-  <div  class="main" ng-controller = "data" >
+  <div  class="main" ng-controller = "data">
 
     <h1 style = "padding: 1px 20px;" > Markov-Based AutoComplete </h1>
+    <h6 style = "text-align: left; margin: 0px"> mode: <span style="color: red"> Shakespeare </span>  </h6>
 
     <form action="" method="post">
-        <input type = "text" name = "inputdata" ng-model="input" value="Enter Text" ng-change = "getSuggestions()"> </input> <br>
-        <p> {{"suggestions:"}} <span style="color: indianred"> prediction </span></p>
+        <textarea type = "text" name = "inputdata" ng-model="input" value="Enter Text" ng-change = "getSuggestions()" rows="4" columns="50"> </textarea> <br>
+        <p> {{"suggestions:"}} <span style="color: indianred"> {{suggestions}} </span></p>
     </form>
 
-    <h4 style = "width: 300px; text-align:center; padding-left:100px;"> Created by Aubrey, Aru, Julian, and Matt </h4>
-    <p> {{suggestions}} <p>
+    <h4 style = "width: 300px; text-align:center; padding-left:100px; color:rgb(,100,50)"> Created by Aubry, Aru, Julian, and Matt </h4>
 
   </div>
 
