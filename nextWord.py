@@ -63,5 +63,4 @@ while firstWord != "q":
     if firstWord.lower() in word_dict:
         print(random.choice(word_dict[firstWord.lower()]))
     else:
-        print("Not a valid word.\n")
-
+        print("Not a valid word\n")
