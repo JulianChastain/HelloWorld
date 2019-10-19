@@ -39,9 +39,11 @@
     <script type="text/javascript">
         var myApp = angular.module('myApp', []);
         myApp.controller('data',function ($scope, $http){
-          $http.get("lastword")
+          $scope.getSuggestions = function() {
+          var lastword = $scope.input.split(" ")[-1]
+          $http.get("/nextword", {params: {"lastword":lastword}})
           .then(function(response){
-            $scope.getSuggestions = response.data;
+              $scope.suggestions = response.data;
           });
           };
         });
@@ -58,12 +60,12 @@
     <h1 style = "padding: 1px 20px;" > Markov-Based AutoComplete </h1>
 
     <form action="" method="post">
-        <input type = "text" name = "inputdata" ng-model="input" value="Enter Text" ng-change ="string"> </input> <br>
+        <input type = "text" name = "inputdata" ng-model="input" value="Enter Text" ng-change = "getSuggestions()"> </input> <br>
         <p> {{"suggestions:"}} <span style="color: indianred"> prediction </span></p>
     </form>
 
     <h4 style = "width: 300px; text-align:center; padding-left:100px;"> Created by Aubrey, Aru, Julian, and Matt </h4>
-    <p> {{getSuggestions}} <p>
+    <p> {{suggestions}} <p>
 
   </div>
 
