@@ -79,4 +79,7 @@ def sample_word(dictionary):
 
 
 firstWord = input()
+train_markov_model
+print(len(second_word))
+print(second_word)
 print(sample_word(second_word[firstWord]))

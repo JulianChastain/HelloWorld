@@ -13,7 +13,7 @@ states are independent.
 
 A Markov chain is a type of Markov process that has either a discrete state
 space or a discrete index set (often representing time), but the precise
-definition of a Markov chain varies.[6] For example, it is common to define a
+definition of a Markov chain varies. For example, it is common to define a
 Markov chain as a Markov process in either discrete or continuous time with a
 countable state space (thus regardless of the nature of time), but it is also
 common to define a Markov chain as having discrete time in either countable or
