@@ -59,7 +59,7 @@ for word_1, word_2 in pairs:
 firstWord = ""
 print("Finished Processing\n")
 while firstWord != "q":
-    firstWord = input("\nEnter a word: ")
+    firstWord = input("Enter a word: ")
     if firstWord.lower() in word_dict:
         print(random.choice(word_dict[firstWord.lower()]))
     else:
