@@ -7,16 +7,17 @@
 # MODULE IMPORTS
 import string
 import numpy as py
+import random
 
 # FUNCTIONS DEFINITIONS
 def buildList(textFile):
     contents = textFile.read()
     parsedList = []
-    wordList = contents.rsplit(' ')
+    wordList = contents.rsplit()
     for word in wordList:
         word = word.translate(str.maketrans('','',string.punctuation))
         word = word.lower()
-        word = word.rstrip()
+        #word = word.replace('\n','')
         parsedList.append(word)
     return parsedList
 
@@ -25,7 +26,7 @@ def make_pairs(words):
         yield (words[i], words[i+1])
 
 # MAIN
-textFile = open("testData.txt","r")
+textFile = open("newTest.txt","r")
 parsedList = buildList(textFile)
 pairs = make_pairs(parsedList)
 word_dict = {}
@@ -35,4 +36,10 @@ for word_1, word_2 in pairs:
     else:
         word_dict[word_1] = [word_2]
 
-print(word_dict)
+while True:
+    firstWord = input()
+    if firstWord.lower() in word_dict:
+        print(random.choice(word_dict[firstWord]))
+    else:
+        print("Not a valid word")
+    print("\n")
