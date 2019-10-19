@@ -9,7 +9,7 @@ import string
 import random
 
 # GLOBALS
-filenameList = ["newTest.txt"]
+filenameList = ["shakespeare.txt"]
 userChoice = 0
 
 # FUNCTION DEFINITIONS
@@ -31,14 +31,7 @@ def make_pairs(words):
 
 # MAIN
 
-print("Training Files: Shakespearean (1)\n")
-try:
-    userChoice = int(input("Enter your choice of training file: "))
-except TypeError:
-    print("Invalid input. Program exiting...\n")
-    exit(1)
 
-filename = filenameList[userChoice-1]
 biglist = []
 for f in filenameList:
     try:
@@ -55,6 +48,13 @@ for f in filenameList:
         else:
             word_dict[word_1] = [word_2]
     biglist.append(word_dict)
+
+print("Training Files: Shakespearean (1)\n")
+try:
+    userChoice = int(input("Enter your choice of training file: "))
+except TypeError:
+    print("Invalid input. Program exiting...\n")
+    exit(1)
 
 firstWord = ""
 print("Finished Processing\n")
