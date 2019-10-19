@@ -41,7 +41,7 @@ except TypeError:
 filename = filenameList[userChoice-1]
 
 try:
-    textFile = open("newTest.txt","r")
+    textFile = open("shakespeare.txt","r")
 except FileNotFoundError:
     print('File not found. Program exiting...\n')
     exit(2)
@@ -63,5 +63,5 @@ while firstWord != "q":
     if firstWord.lower() in word_dict:
         print(random.choice(word_dict[firstWord.lower()]))
     else:
-        print("Not a valid word\n")
+        print("Not a valid word.\n")
 
