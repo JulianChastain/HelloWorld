@@ -14,20 +14,19 @@ import string
 def buildList(textFile):
     contents = textFile.read()
     parsedList = []
-    for word in contents:
-        #word = word.translate(str.maketrans("","",string.punctuation))
-        #parsedList.append(word)
-        print(word)
-
-
-    for element in parsedList:
-      print(element)
-
+    wordList = contents.rsplit(' ')
+    for word in wordList:
+        word = word.translate(str.maketrans('','',string.punctuation))
+        word = word.lower()
+        word = word.rstrip('\n')
+        parsedList.append(word)
+    return parsedList
 
 
 # MAIN
 textFile = open("test.txt","r")
-buildList(textFile)
+parsedList = buildList(textFile)
+
 
 
 
