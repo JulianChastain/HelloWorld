@@ -49,7 +49,7 @@
           }
           var words = $scope.input.split(" ");
           var lastWord = words[words.length -1];
-          $http.get("/nextword", {params: {"lastWord":lastword}})
+          $http.get("/nextword", {params: {"lastWord":lastWord}})
           .then(function(response){
               $scope.suggestions = response.data;
 
