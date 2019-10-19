@@ -1,0 +1,4 @@
+1) Create frontend that will display next word from nextWord.py at half opacity as the next nextWord
+2) Create nextWord.py to interface with data structure (.pickle file?) to find the next nextWord
+3) Create a way to store the markov chain such that we only have to parse the data once. (chain.py)
+4) Create a way to parse some arbitrary amount of word data
