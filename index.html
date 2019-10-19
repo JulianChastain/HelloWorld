@@ -16,6 +16,10 @@
           text-align: center;
       }
 
+      body{
+        overflow: hidden;
+      }
+      
       .main{
         padding: 200px 40%;
       }
@@ -40,8 +44,7 @@
     <script type="text/javascript">
         var myApp = angular.module('myApp', []);
         myApp.controller('data',function ($scope, $http, $window){
-
-
+          $scope.dialect = "Shakespeare";
           $scope.getSuggestions = function() {
           if($scope.input.endsWith("  ")){
             var a = $scope.input.trim();
@@ -49,11 +52,9 @@
           }
           var words = $scope.input.split(" ");
           var lastWord = words[words.length -1];
-          $http.get("/nextword", {params: {"lastWord":lastword}})
+          $http.get("/nextword", {params: {"lastWord":lastWord, "dialect":$scope.dialect}})
           .then(function(response){
               $scope.suggestions = response.data;
-
-
           });
           };
         });
@@ -63,19 +64,23 @@
 
   </head>
   <body>
-
-
   <div  class="main" ng-controller = "data">
-
     <h1 style = "padding: 1px 20px;" > Markov-Based AutoComplete </h1>
-    <h6 style = "text-align: left; margin: 0px"> mode: <span style="color: red"> Shakespeare </span>  </h6>
+    <h6 style = "text-align: left; margin: 0px"> mode: <span >
+      <select ng-model="dialect" style="color:tomato; background-color: white; padding: 3px">
+          <option value="Shakespeare"> Shakespeare </option>
+          <option value="Beyonce"> Beyonce </option>
+          <option value="Bible"> Bible </option>
+      </select>
+ </h6>
+    <br>
 
-    <form action="" method="post">
+    <form>
         <textarea id= "in" type = "text" name = "inputdata" ng-model="input" value="Enter Text" ng-change = "getSuggestions()" ng-trim="false" rows="4" columns="50"> </textarea> <br>
         <p> {{"suggestions:"}} <span style="color: indianred"> {{suggestions}} </span></p>
     </form>
 
-    <h4 style = "width: 300px; text-align:center; padding-left:100px; color:rgb(50,100,50)"> Created by Aubry, Aru, Julian, and Matt </h4>
+    <h4 style = "width: 300px; text-align:center; padding-left:100px; color:tomato"> Created by Aubry, Aru, Julian, and Matt. </h4>
 
   </div>
 
