@@ -9,7 +9,7 @@ import string
 import random
 
 # GLOBALS
-filenameList = ["shakespeare.txt"]
+filenameList = ["shakespeare.txt", "beyonce.txt", "bible.txt"]
 userChoice = 0
 
 # FUNCTION DEFINITIONS
