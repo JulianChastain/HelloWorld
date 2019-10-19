@@ -2,7 +2,7 @@
 
 <html ng-app = "myApp">
   <head>
-    <title> Markov  Generator </title>
+    <title> Markov AutoComplete </title>
     <meta charset = "utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
@@ -20,6 +20,9 @@
         overflow: hidden;
       }
 
+      br{
+        line-height: 50%;
+      }
       .main{
         padding: 200px 40%;
       }
@@ -33,6 +36,7 @@
         border-radius: 6px;
         border: 2px solid;
         font-size: 36px;
+        color: gray;
       }
 
       .navbar {
@@ -41,17 +45,17 @@
         position: fixed;
         bottom: 0;
         width: 100%;
+        color: gray;
 }
 
-      textarea[value]{
-        color: gray;
-      }
+
 
     </style>
 
     <script type="text/javascript">
         var myApp = angular.module('myApp', []);
         myApp.controller('data',function ($scope, $http, $window){
+          $scope.input = "To be, or not to be..."
           $scope.dialect = "0";
           $scope.getSuggestions = function() {
           if($scope.input.endsWith("  ")){
@@ -82,9 +86,11 @@
     <br>
 
     <form>
-        <textarea type = "text" name = "inputdata" ng-model="input" value="Enter Text" ng-change = "getSuggestions()" ng-trim="false" rows="4" columns="50"> </textarea> <br>
-        <p> {{"suggestions:"}} <span style="color: indianred"> {{suggestions}} </span></p>
+        <textarea type = "text" name = "inputdata" value = "none" ng-model="input" ng-change = "getSuggestions()" ng-trim="false" rows="4" columns="50"> </textarea>
+        <br>
     </form>
+
+      <p> {{"suggestions:"}} <span style="color: indianred"> {{suggestions}} </span></p>
 
     <h4 style = "width: 300px; text-align:center; padding-left:100px; color:tomato"> Created by Aubry, Aru, Julian, and Matt. </h4>
 
