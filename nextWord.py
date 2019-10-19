@@ -1,8 +1,62 @@
+# HELLOWORLD 2019
+# Program Description:
+#
+#
+#
+#
 
-# will take the previous word entered by the
-# Need to analyze the words given in the textfile (testData.txt) and decide the
-# probability of what the next word will be
-def nextWord(lastword):
-  return lastword + "Clemson"
+# MODULE IMPORTS
+import string
 
-import numpy as py
+
+# FUNCTIONS DEFINITIONS
+
+def buildList(textFile):
+    contents = textFile.read()
+    parsedList = []
+    for word in contents:
+        #word = word.translate(str.maketrans("","",string.punctuation))
+        #parsedList.append(word)
+        print(word)
+
+
+    for element in parsedList:
+      print(element)
+
+
+
+# MAIN
+textFile = open("test.txt","r")
+buildList(textFile)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
