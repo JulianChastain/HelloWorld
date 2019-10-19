@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html ng-app = "myApp">
+  <head>
+    <title> Markov  Generator </title>
+    <meta charset = "utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <style>
+
+      @import url('https://fonts.googleapis.com/css?family=Roboto:bold&display=swap');
+
+      *{
+          font-family: Roboto;
+          box-sizing: border-box;
+          text-align: center;
+      }
+
+      .main{
+        padding: 200px 40%;
+      }
+
+      input[type = "text"]{
+        background-color: white;
+        color: black;
+        width: 400px;
+        height: 300px;
+        padding: 20px;
+        border-radius: 6px;
+        border: 2px solid;
+      }
+
+      input[value]{
+        color: gray;
+      }
+
+    </style>
+
+    <script type="text/javascript">
+        var myApp = angular.module('myApp', []);
+        myApp.controller('data',function ($scope, $http){
+          $http.get("lastword")
+          .then(function(response){
+            $scope.getSuggestions = response.data;
+          });
+          };
+        });
+
+
+    </script>
+
+  </head>
+  <body>
+
+
+  <div  class="main" ng-controller = "data" >
+
+    <h1 style = "padding: 1px 20px;" > Markov-Based AutoComplete </h1>
+
+    <form action="" method="post">
+        <input type = "text" name = "inputdata" ng-model="input" value="Enter Text" ng-change ="string"> </input> <br>
+        <p> {{"suggestions:"}} <span style="color: indianred"> prediction </span></p>
+    </form>
+
+    <h4 style = "width: 300px; text-align:center; padding-left:100px;"> Created by Aubrey, Aru, Julian, and Matt </h4>
+    <p> {{getSuggestions}} <p>
+
+  </div>
+
+  </body>
+</html>
