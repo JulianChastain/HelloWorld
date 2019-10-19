@@ -39,17 +39,24 @@
 
     <script type="text/javascript">
         var myApp = angular.module('myApp', []);
-        myApp.controller('data',function ($scope, $http){
+        myApp.controller('data',function ($scope, $http, $window){
+
+
           $scope.getSuggestions = function() {
+          if($scope.input.endsWith("  ")){
+            var a = $scope.input.trim();
+            $scope.input = a + " " + $scope.suggestions;
+          }
           var words = $scope.input.split(" ");
           var lastWord = words[words.length -1];
           $http.get("/nextword", {params: {"lastWord":lastword}})
           .then(function(response){
               $scope.suggestions = response.data;
+
+
           });
           };
         });
-
 
 
     </script>
@@ -64,13 +71,14 @@
     <h6 style = "text-align: left; margin: 0px"> mode: <span style="color: red"> Shakespeare </span>  </h6>
 
     <form action="" method="post">
-        <textarea type = "text" name = "inputdata" ng-model="input" value="Enter Text" ng-change = "getSuggestions()" rows="4" columns="50"> </textarea> <br>
+        <textarea id= "in" type = "text" name = "inputdata" ng-model="input" value="Enter Text" ng-change = "getSuggestions()" ng-trim="false" rows="4" columns="50"> </textarea> <br>
         <p> {{"suggestions:"}} <span style="color: indianred"> {{suggestions}} </span></p>
     </form>
 
-    <h4 style = "width: 300px; text-align:center; padding-left:100px; color:rgb(,100,50)"> Created by Aubry, Aru, Julian, and Matt </h4>
+    <h4 style = "width: 300px; text-align:center; padding-left:100px; color:rgb(50,100,50)"> Created by Aubry, Aru, Julian, and Matt </h4>
 
   </div>
+
 
   </body>
 </html>
