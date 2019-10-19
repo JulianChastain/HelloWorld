@@ -1,0 +1,73 @@
+import tornado.ioloop
+import tornado.web
+import string
+import random
+
+filenameList = ["shakespeare.txt"]
+userChoice = 0
+
+def buildList(textFile):
+    contents = textFile.read()
+    parsedList = []
+    wordList = contents.rsplit()
+    for word in wordList:
+        word = word.translate(str.maketrans('', '', string.punctuation))
+        word = word.lower()
+        parsedList.append(word)
+    return parsedList
+
+def make_pairs(words):
+    for i in range(len(words)-1):
+        yield (words[i], words[i+1])
+
+
+print("Training Files: Shakespearean (1)\n")
+
+try:
+        userChoice = int(input("Enter your choice of training file: "))
+except TypeError:
+        print("Invalid input. Program exiting...\n")
+        exit(1)
+
+try:
+    textFile = open("NewTest.txt", "r")
+except FileNotFoundError:
+    print('File not found. Program exiting...\n')
+    exit(2)
+
+parsedList = buildList(textFile)
+pairs = make_pairs(parsedList)
+word_dict = {}
+
+for word_1, word_2 in pairs:
+    if word_1 in word_dict.keys():
+        word_dict[word_1].append(word_2)
+    else:
+        word_dict[word_1] = [word_2]
+
+
+firstWord = ""
+print("Finished Processing\n")
+
+def nextWord(lastWord):
+    if lastWord.lower() in word_dict:
+        return random.choice(word_dict[lastWord.lower()])
+    else:
+        return "Not a valid word\n"
+
+class nextWordHandler(tornado.web.RequestHandler):
+    def get(self):
+        lastWord = self.get_query_argument("lastWord")
+        self.write(nextWord(lastWord))
+
+def make_app():
+        return tornado.web.Application([
+            (r"/nextword", nextWordHandler),
+            (r"/(.*)", tornado.web.StaticFileHandler, {"path": "Static", "default_filename": "index.html"}), 
+        ])
+
+if __name__ == "__main__":
+    app = make_app()
+    app.listen(8888)
+    tornado.ioloop.IOLoop.current().start()
+
