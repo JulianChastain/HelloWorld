@@ -6,10 +6,14 @@
 #
 # MODULE IMPORTS
 import string
-import numpy as py
 import random
 
-# FUNCTIONS DEFINITIONS
+# GLOBALS
+filenameList = ["shakespeare.txt"]
+userChoice = 0
+
+# FUNCTION DEFINITIONS
+# buildList
 def buildList(textFile):
     contents = textFile.read()
     parsedList = []
@@ -17,16 +21,29 @@ def buildList(textFile):
     for word in wordList:
         word = word.translate(str.maketrans('','',string.punctuation))
         word = word.lower()
-        #word = word.replace('\n','')
         parsedList.append(word)
     return parsedList
 
+# make_pairs
 def make_pairs(words):
     for i in range(len(words)-1):
         yield (words[i], words[i+1])
 
 # MAIN
-textFile = open("newTest.txt","r")
+try:
+    userChoice = int(input("Enter your choice of training file: "))
+except TypeError:
+    print("Invalid input. Program exiting...")
+    exit(1)
+
+filename = filenameList[userChoice-1]
+
+try:
+    textFile = open("newTest.txt","r")
+except FileNotFoundError:
+    print('File not found. Program exiting...')
+    exit(2)
+
 parsedList = buildList(textFile)
 pairs = make_pairs(parsedList)
 word_dict = {}
